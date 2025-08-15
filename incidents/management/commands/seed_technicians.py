@@ -49,4 +49,4 @@ class Command(BaseCommand):
             serializer = CreateTechnicianSerializer(data=tech_coord)
             serializer.is_valid(raise_exception=True)
             serializer.save()
-        self.stdout.write(self.style.SUCCESS("Technicians seeded successfully"))
+        self.stdout.write(self.style.SUCCESS("Technicians seeded successfully 🌱"))

@@ -84,5 +84,8 @@ docker-compose exec web python manage.py migrate
 Seed Technicians
 docker-compose exec web python manage.py seed_technicians
 
+Seed Technicians
+docker-compose exec web python manage.py seed_incident
+
 Run Tests
 docker-compose exec web pytest -q
