@@ -20,5 +20,12 @@ COPY . /app
 # Expose port
 EXPOSE 8000
 
+
+# Change entrypoint shell script permission
+RUN chmod +x ./entrypoint.sh
+
+# Set the entrypoint script as the entrypoint
+ENTRYPOINT ["sh", "./entrypoint.sh"]
+
 # Default command (can be overridden by docker-compose)
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
