@@ -36,9 +36,11 @@
 
 <body class="p-3">
   <div id="loadingBar" class="bg-primary"></div>
-
+  
   <!-- Main Content -->
-  <div class="container">{% block page_content %}{% endblock %}</div>
+  <div class="container">
+    <h1 class="mb-3">Safetify</h1>
+    {% block page_content %}{% endblock %}</div>
 
   {% block extra_js %}{% endblock %}
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
