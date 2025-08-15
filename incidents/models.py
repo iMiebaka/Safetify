@@ -38,4 +38,4 @@ class Assignment(BaseABCModel):
     assigned_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"Incident #{self.incident_id} → {self.technician.name}"
+        return f"Incident #{self.incident_id} → {self.technician.user.name}"
