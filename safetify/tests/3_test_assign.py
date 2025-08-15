@@ -33,7 +33,7 @@ def test_assign_nearest_technician(api_client):
     url = reverse("incident-assign-nearest", args=[incident.id])
     res = api_client.post(url, data=json.dumps({}), content_type="application/json")
     assert res.status_code == 200
-    assert res.json()["technician"]["user"] == "Tech1"
+    assert res.json()["technician"]["user"] == "Tech 1"
 
 
 @pytest.mark.django_db
