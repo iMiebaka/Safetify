@@ -1,20 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("/api/incidents/?ordering=-created_at")
-    .then((r) => r.json())
-    .then((items) => {
-      const rows = document.getElementById("rows");
-      items.forEach((i) => {
-        const el = document.createElement("div");
-        el.className = "list-group-item";
-        el.innerText = `#${i.id} — ${i.title} — status: ${i.status} — risk: ${i.risk_score}`;
-
-        // const link = document.createElement("a");
-        // link.setAttribute("href", `/incident/${i.id}`);
-        // link.innerText = `#${i.id} — ${i.title} — status: ${i.status} — risk: ${i.risk_score}`;
-        // el.appendChild(link);
-        rows.appendChild(el);
-      });
+  const fetchAllIncidents = async () => {
+    window.addEventListener("load", function () {
+      document.getElementById("loadingBar").style.width = "100%";
     });
+    // For real page loading:
+    fetch("/api/incidents/?ordering=-created_at")
+      .then((r) => r.json())
+      .then((items) => {
+        const rows = document.getElementById("rows");
+        items.forEach((i) => {
+          const el = document.createElement("div");
+          el.className = "list-group-item";
+          el.innerText = `#${i.id} — ${i.title} — status: ${i.status} — risk: ${i.risk_score}`;
+          rows.appendChild(el);
+
+          // const link = document.createElement("a");
+          // link.setAttribute("href", `/incident/${i.id}`);
+          // link.innerText = `#${i.id} — ${i.title} — status: ${i.status} — risk: ${i.risk_score}`;
+          // el.appendChild(link);
+          
+          setTimeout(() => {
+            document.getElementById("loadingBar").style.opacity = "0";
+          }, 300);
+        });
+      });
+  };
+  fetchAllIncidents().then();
+
   const form = document.getElementById("incidentForm");
   const getLocationBtn = document.getElementById("getLocationBtn");
   const submitBtn = form.querySelector('button[type="submit"]');
@@ -94,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Show success message
         submitText.textContent = "Submitted!";
         setTimeout(() => {
-          window.location.href = "/";
+          fetchAllIncidents().then();
         }, 1000);
       })
       .catch((error) => {
