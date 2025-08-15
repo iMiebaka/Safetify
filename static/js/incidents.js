@@ -18,13 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
           // link.setAttribute("href", `/incident/${i.id}`);
           // link.innerText = `#${i.id} — ${i.title} — status: ${i.status} — risk: ${i.risk_score}`;
           // el.appendChild(link);
-          
+
           setTimeout(() => {
             document.getElementById("loadingBar").style.opacity = "0";
           }, 300);
         });
       });
   };
+
   fetchAllIncidents().then();
 
   const form = document.getElementById("incidentForm");
@@ -32,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitBtn = form.querySelector('button[type="submit"]');
   const submitText = document.getElementById("submitText");
   const spinner = document.getElementById("spinner");
+  const cancelBtn = document.getElementById("cancel-btn");
 
   // Handle current location button
   getLocationBtn.addEventListener("click", function () {
@@ -106,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Show success message
         submitText.textContent = "Submitted!";
         setTimeout(() => {
-          fetchAllIncidents().then();
+          location.reload();
         }, 1000);
       })
       .catch((error) => {
