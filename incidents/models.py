@@ -1,7 +1,9 @@
-from django.contrib.gis.db import models
 from django.utils import timezone
+from django.contrib.gis.db import models
 
-class Incident(models.Model):
+from utils.models import BaseABCModel
+
+class Incident(BaseABCModel):
     STATUS_CHOICES = [
         ("queued", "Queued"),
         ("assigned", "Assigned"),
@@ -15,9 +17,6 @@ class Incident(models.Model):
     status = models.CharField(max_length=16, choices=STATUS_CHOICES, default="queued")
     location = models.PointField(geography=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
     def save(self, *args, **kwargs):
         if not self.risk_score:
             # Simple placeholder risk score = severity for now
@@ -28,7 +27,7 @@ class Incident(models.Model):
         return f"Incident #{self.id}: {self.title} [{self.status}]"
 
 
-class Assignment(models.Model):
+class Assignment(BaseABCModel):
     incident = models.OneToOneField(
         Incident, on_delete=models.CASCADE, related_name="assignment"
     )
