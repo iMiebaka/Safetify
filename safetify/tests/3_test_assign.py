@@ -2,7 +2,7 @@ import json
 import pytest
 import logging
 from django.urls import reverse
-from incidents.models import Incident
+from incidents.models import Incident, Assignment
 from django.contrib.gis.geos import Point
 
 
@@ -31,9 +31,14 @@ def test_assign_nearest_technician(api_client):
     tech.is_valid(raise_exception=True)
     tech.save()
     url = reverse("incident-assign-nearest", args=[incident.id])
+    assignment_count = Assignment.objects.count()
+    assert assignment_count == 0
     res = api_client.post(url, data=json.dumps({}), content_type="application/json")
     assert res.status_code == 200
     assert res.json()["technician"]["user"] == "Tech 1"
+    assignment_count = Assignment.objects.count()
+    assert assignment_count == 1
+    
 
 
 @pytest.mark.django_db
