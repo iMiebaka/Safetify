@@ -5,17 +5,17 @@ async function addToQueue(id) {
       "Content-Type": "application/json",
       "X-CSRFToken": "{{ csrf_token }}", // Django CSRF token
     },
-    body: JSON.stringify(payload),
+    body: "{}",
   })
     .then((response) => {
-      if (!response.ok) {
+      if (!response.ok || response.status == 202) {
         return response.json().then((err) => {
           throw err;
         });
       }
       return response.json();
     })
-    .then((data) => {
+    .then(() => {
       // Show success message
       setTimeout(() => {
         location.reload();
@@ -44,16 +44,33 @@ const fetchAllIncidents = async () => {
       const rows = document.getElementById("rows");
       items.forEach((i) => {
         const container = document.createElement("section");
-        const el = document.createElement("div");
-        // el.className = "list-group-item";
-        // el.innerText = `#${i.id} — ${i.title} — status: ${i.status} — risk: ${i.risk_score}`;
-        // rows.appendChild(el);
+        container.className =
+          "list-group-item d-flex justify-content-between align-items-start";
 
+        const leftEl = document.createElement("div");
         const link = document.createElement("a");
         link.setAttribute("href", `/i/${i.id}`);
         link.innerText = `#${i.id} — ${i.title} — status: ${i.status} — risk: ${i.risk_score}`;
-        el.appendChild(link);
-        rows.appendChild(el);
+        leftEl.appendChild(link);
+
+        const rightEl = document.createElement("div");
+        const btn = document.createElement("button");
+        btn.className = "btn btn-primary";
+        if (!i.assignment) {
+          btn.innerText = "Assign to Expect";
+          btn.onclick = async () => await addToQueue(i.id);
+        } else {
+          btn.innerText = "View Assignment";
+          btn.onclick = () => (location.href = `/a/${i.assignment}`);
+        }
+        rightEl.appendChild(btn);
+
+
+        // Appending children
+        container.appendChild(leftEl);
+        container.appendChild(rightEl);
+
+        rows.appendChild(container);
       });
     })
     .finally(() => {
