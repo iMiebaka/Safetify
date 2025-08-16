@@ -1,4 +1,5 @@
 async function addToQueue(id) {
+  document.getElementById("page-loader").classList.remove("d-none");
   fetch(`/api/incidents/${id}/assign-nearest/`, {
     method: "POST",
     headers: {
@@ -17,9 +18,7 @@ async function addToQueue(id) {
     })
     .then(() => {
       // Show success message
-      setTimeout(() => {
-        location.reload();
-      }, 1000);
+      location.reload();
     })
     .catch((error) => {
       // Show error message
@@ -29,6 +28,7 @@ async function addToQueue(id) {
       } else if (error.message) {
         errorMsg += ": " + error.message;
       }
+      document.getElementById("page-loader").classList.add("d-none");
       alert(errorMsg);
     });
 }
@@ -64,7 +64,6 @@ const fetchAllIncidents = async () => {
           btn.onclick = () => (location.href = `/a/${i.assignment}`);
         }
         rightEl.appendChild(btn);
-
 
         // Appending children
         container.appendChild(leftEl);
