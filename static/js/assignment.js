@@ -10,8 +10,6 @@ const fetchAssignment = async () => {
   fetch(`/api/assignments/${assignmentId}/`)
     .then((r) => r.json())
     .then((data) => {
-      console.log(data);
-
       document.getElementById("incident-title").textContent =
         data.incident.title;
       document.getElementById("incident-status").textContent =
