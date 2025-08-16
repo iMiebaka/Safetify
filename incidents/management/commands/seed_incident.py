@@ -5,7 +5,7 @@ from incidents.models import Incident
 
 
 class Command(BaseCommand):
-    help = "Seed sample technicians into the database"
+    help = "Seed sample incidents into the database"
 
     def handle(self, *args, **kwargs):
         incidents = [

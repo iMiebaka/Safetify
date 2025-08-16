@@ -15,11 +15,11 @@ class Command(BaseCommand):
                     "password": "1234",
                     "username": "techa",
                     "first_name": "Tech",
-                    "phone": "+234083000000",
                     "email": "techa@safetify.com",
                 },
                 "payload": {
-                    "location": (3.3792, 6.5244)  # Lagos
+                    "phone": "+234083000000",
+                    "location": (3.3792, 6.5244),  # Lagos
                 },
             },
             {
@@ -28,21 +28,19 @@ class Command(BaseCommand):
                     "password": "1234",
                     "first_name": "Tech",
                     "username": "techb",
-                    "phone": "+234083000001",
                     "email": "techb@safetify.com",
                 },
-                "payload": {"location": (3.40, 6.50)},
+                "payload": {"phone": "+234083000001", "location": (3.40, 6.50)},
             },
             {
                 "user": {
-                    "last_name": "C",
+                    "last_name": "d",
                     "password": "1234",
                     "first_name": "Tech",
-                    "username": "techc",
-                    "phone": "+234083000002",
-                    "email": "techc@safetify.com",
+                    "username": "techd",
+                    "email": "techd@safetify.com",
                 },
-                "payload": {"location": (3.30, 6.55)},
+                "payload": {"phone": "+234083000002", "location": (3.3678, 6.5123)},
             },
         ]
         for tech_coord in tech_coords:
