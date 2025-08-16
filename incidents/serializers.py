@@ -27,7 +27,7 @@ class IncidentSerializer(serializers.ModelSerializer):
 class AssignmentSerializer(serializers.ModelSerializer):
     from technicians.serializers import TechnicianSerializer
 
-    incident = serializers.PrimaryKeyRelatedField(read_only=True)
+    incident = IncidentSerializer(read_only=True)
     technician = TechnicianSerializer(read_only=True)
 
     class Meta:

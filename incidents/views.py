@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import Incident
+from .models import Incident, Assignment
 from .serializers import (
     IncidentSerializer,
     AssignmentSerializer,
@@ -36,3 +36,8 @@ class IncidentViewSet(viewsets.ModelViewSet):
 
         return Response(AssignmentSerializer(assignment).data)
 
+
+
+class AssignmentViewSet(viewsets.ModelViewSet):
+    queryset = Assignment.objects.all().order_by("-created_at")
+    serializer_class = AssignmentSerializer
