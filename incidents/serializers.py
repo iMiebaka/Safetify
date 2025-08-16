@@ -17,11 +17,18 @@ class IncidentSerializer(serializers.ModelSerializer):
             "severity",
             "location",
             "created_at",
+            "assignment",
             "risk_score",
             "updated_at",
             "description",
         ]
-        read_only_fields = ["risk_score", "status", "created_at", "updated_at"]
+        read_only_fields = [
+            "status",
+            "risk_score",
+            "assignment",
+            "created_at",
+            "updated_at",
+        ]
 
 
 class AssignmentSerializer(serializers.ModelSerializer):
