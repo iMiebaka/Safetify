@@ -57,6 +57,7 @@ Assign Nearest Technician
 ```bash
 POST /api/incidents/{id}/assign-nearest
 ```
+This may look redundant and shouldn't be an api route, but it had to be done so the process can be understood. However if to ben implemented, it should be part of a celery queue when an incident is created. 
 
 ### Development
 
