@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head_title %} Incident {% endblock %}
+
+{% block page_content %}
+
+    <div class="py-1">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="h5 mb-0">Incident Details</h2>
+                <p id="error-el" hidden>Unable to get Incident</p>
+            </div>
+            <div class="card-body">
+                <div id="incident-details">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3 id="incident-title" class="h4 mb-0"></h3>
+                        <span id="incident-status" class="badge"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <span class="severity-indicator" id="severity-icon"></span>
+                        <strong>Severity:</strong> <span id="incident-severity"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong>Risk Score:</strong> <span id="incident-risk"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong>Location:</strong> 
+                        <span id="incident-location"></span>
+                        <small class="text-muted d-block">(Longitude, Latitude)</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'js/incident.js'  %}"></script>
+{% endblock %}
