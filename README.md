@@ -79,13 +79,20 @@ Note: You’ll need system packages for GeoDjango (GDAL/GEOS/Proj):
 sudo apt-get install binutils libproj-dev gdal-bin
 
 Run Migrations
+```bash
 docker-compose exec web python manage.py migrate
-
+```
 Seed Technicians
+```bash
 docker-compose exec web python manage.py seed_technicians
+```
 
 Seed Technicians
+```bash
 docker-compose exec web python manage.py seed_incident
+```
 
 Run Tests
+```bash
 docker-compose exec web pytest -q
+```
